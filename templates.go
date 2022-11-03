@@ -1,7 +1,7 @@
 package passkit
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -69,7 +69,7 @@ type inMemoryPassTemplate struct {
 	files map[string][]byte
 }
 
-	func NewInMemoryPassTemplate() *inMemoryPassTemplate {
+func NewInMemoryPassTemplate() *inMemoryPassTemplate {
 	return &inMemoryPassTemplate{files: make(map[string][]byte)}
 }
 
@@ -87,7 +87,7 @@ func (m *inMemoryPassTemplate) ProvisionPassAtDirectory(tmpDirPath string) error
 	}
 
 	for file, d := range m.files {
-		err = ioutil.WriteFile(filepath.Join(dst, string(file)), d, 0644)
+		err = os.WriteFile(filepath.Join(dst, string(file)), d, 0644)
 		if err != nil {
 			os.RemoveAll(dst)
 			return err
@@ -121,7 +121,7 @@ func (m *inMemoryPassTemplate) downloadFile(u url.URL) ([]byte, error) {
 	}
 	defer response.Body.Close()
 
-	b, err := ioutil.ReadAll(response.Body)
+	b, err := io.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
 	}
