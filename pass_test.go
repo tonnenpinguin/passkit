@@ -600,6 +600,7 @@ func getBasicPass() Pass {
 		PassTypeIdentifier:         "test",
 		TeamIdentifier:             "TEAM1",
 		AuthenticationToken:        "asldadilno21o31n41lkasndio123",
+		WebServiceURL:              "https://test.invalid",
 		Generic:                    &GenericPass{PrimaryFields: []Field{f}},
 		AssociatedStoreIdentifiers: []int64{123},
 	}
