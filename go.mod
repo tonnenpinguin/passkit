@@ -1,4 +1,4 @@
-module passkit
+module github.com/tonnenpinguin/passkit
 
 go 1.19
 
